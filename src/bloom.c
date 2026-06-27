@@ -30,3 +30,16 @@ int verificar_bit(char *vetor, int pos){
         vetor[byte_posicao] = vetor[byte_posicao] + potencias_de_dois[bit_posicao];
     }
 }
+
+Filtrodebloom criar_filtro(int n){
+    Filtrodebloom bloom;
+    //10 bits para cada elemento inserido
+    bloom.m = n * 10;
+    // 7 funções hash
+    bloom.k = 7;
+   
+    //Calloc vai zerar todos os bits automaticamente ao alocar a memória
+    bloom.vetor = calloc((bloom.m / 8) + 1, sizeof(char));
+
+    return bloom;
+}
