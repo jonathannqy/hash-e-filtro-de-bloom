@@ -1,32 +1,43 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <time.h>
 
 #include "hash.h"
-#include "bloom.h"
+#include "script.h"
 
 
 void menu_principal();
 
 int main() {
+
+    // Inicializando a tabela hash
+    tabelaHash hash;    
+    inicializar_hash(&hash);
+    //////////////////////////////
+
+    // Inicializando o filtro de Bloom
+    //////////////////////////////
+
     int opcao;
     char identificador[50];
-    char nome_arquivo[50];
 
     do {
         menu_principal();
         if (scanf("%d", &opcao) != 1) {
             printf("Entrada inválida!\n");
             while(getchar() != '\n'); // Limpa o buffer
-            continue;
         }
 
         switch (opcao) {
             case 1: {
                 printf("Digite o identificador do usuário: ");
                 scanf("%49s", identificador);
-                
-                printf("Usuário %s inserido com sucesso.\n", identificador);
+
+                inserir_hash(&hash, identificador);
+                // Inserir no bloom depois
+
+                printf("Usuário %s inserido com sucesso (Hash).\n", identificador);
                 break;
             }
 
@@ -48,27 +59,79 @@ int main() {
                 break;
             }
 
-
             case 4: {
-                printf("Digite o nome do arquivo texto (ex: usuarios.txt [cite: 55]): ");
-                scanf("%49s", nome_arquivo);
-                
-                FILE *arquivo = fopen(nome_arquivo, "r");
-                if (arquivo == NULL) {
-                    printf("Erro na hora de abrir o arquivo '%s'!\n", nome_arquivo);
+                int lote;
+
+                printf("Qual lote deseja inserir:\n");
+                printf("[1] Lote 1k\n");
+                printf("[2] Lote 10k\n");
+                printf("[3] Lote 100k\n");  
+                scanf("%d", &lote);
+
+                if (lote == 1) {
+                    inserir_lote_hash(&hash, "data/usuarios1k.txt");
                 } 
                 
-                else {
-                    
-                    printf("Lote carregado com sucesso!\n");
-                    fclose(arquivo);
+                else if (lote == 2) {
+                    inserir_lote_hash(&hash, "data/usuarios10k.txt");
                 }
+                
+                else if (lote == 3) {
+                    inserir_lote_hash(&hash, "data/usuarios100k.txt");
+                }
+
+
+                break;
+            }
+
+
+            case 5: {
+                int tamanho_lote;
+
+                printf("Qual o tamanho do lote: \n");
+                printf("[1] Lote 1k\n");
+                printf("[2] Lote 10k\n");
+                printf("[3] Lote 100k\n");
+                scanf("%d", &tamanho_lote);
+
+                    if (tamanho_lote == 1) {
+                        tamanho_lote = 1000;
+                        gerar_arquivo("data/usuarios1k.txt", tamanho_lote);
+                    } 
+
+                    else if (tamanho_lote == 2) {
+                        tamanho_lote = 10000;
+                        gerar_arquivo("data/usuarios10k.txt", tamanho_lote);
+                    } 
+                    
+                    else if (tamanho_lote == 3) {
+                        tamanho_lote = 100000;
+                        gerar_arquivo("data/usuarios100k.txt", tamanho_lote);
+                    } 
+                    
+                    else {
+                        printf("Opção inválida!\n");
+                        break;
+                    }
 
                 break;
 
             }
 
+            case 6: {
+                printf("Quantidade de registros: %d\n", quantidade_registros(&hash));
+                break;
+            }
+
             case 0: {
+                printf("Limpando tabela hash..\n");
+                liberar_hash(&hash);
+
+                /*
+                printf("Limpando filtro de Bloom..\n");
+                liberar_filtro(&meu_filtro);
+                */
+
                 printf("Encerrando o sistema...\n");
                 break;
            }
@@ -82,17 +145,17 @@ int main() {
 
     } while (opcao != 0);
 
-    // TODO: Liberar memoria alocada para a Hash e para o vetor de bits do Bloom (se houver)
-
     return 0;
 }
 
 void menu_principal() {
     printf("\n--- Sistema de Verificacao de Cadastro ---\n");
-    printf("[1] Inserir novo usuario\n");
-    printf("[2] Consultar usuario\n");
-    printf("[3] Exibir estatisticas\n");
-    printf("[4] Inserir em lote (Arquivo)\n");
+    printf("[1] Inserir novo usuário\n");
+    printf("[2] Consultar usuário\n");
+    printf("[3] Exibir estatísticas\n");
+    printf("[4] Inserir lote\n");
+    printf("[5] Gerar lote(Arquivo)\n");
+    printf("[6] Quantidade de registros\n");
     printf("[0] Sair\n");
     printf("Escolha uma opção: ");
 }

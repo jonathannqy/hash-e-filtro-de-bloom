@@ -6,8 +6,23 @@
 // 100003 é um número primo adequado para evitar colisões com até 100000 entradas.
 #define TAMANHO_TABELA 100003 
 
+// Tamanhos ideais para um lote de 1000:
+// #define TAMANHO_TABELA 4001 // FC = 25%.
+// #define TAMANHO_TABELA 1999 // FC = 50%.
+// #define TAMANHO_TABELA 1361 // FC = 75%.
+
+// Tamanhos ideais para um lote de 10.000:
+//#define TAMANHO_TABELA 40009 // FC = 0.25 = 25%.
+// #define TAMANHO_TABELA 20011 // FC = 50%.
+// #define TAMANHO_TABELA  13337 // FC = 75%.
+
+// Tamanhos ideais para um lote de 100.000:
+//#define TAMANHO_TABELA 400009 // FC = 0.25 = 25%. 
+// #define TAMANHO_TABELA  200003 // FC = 50%.
+// #define TAMANHO_TABELA  133379 // FC = 75%.
+
 // Funções principais
-void inicializarHash(tabelaHash* h) {
+void inicializar_hash(tabelaHash* h) {
     // Aloca o vetor de elementos com base no tamanho definido
     h->tabela = (elementoHash*)malloc(TAMANHO_TABELA * sizeof(elementoHash));
     h->quantidade = 0;
@@ -18,7 +33,7 @@ void inicializarHash(tabelaHash* h) {
     }
 }
 
-void liberarHash(tabelaHash* h) {
+void liberar_hash(tabelaHash* h) {
     if (h->tabela != NULL) {
         free(h->tabela);
         h->tabela = NULL;
@@ -42,7 +57,12 @@ int hash_divisao(char* chave) {
     return soma % TAMANHO_TABELA;
 }
 
-// Inserção com sondagem linear
+// Função da sondagem linear
+int sondagem_linear(int indice_atual) {
+    return (indice_atual + 1) % TAMANHO_TABELA;
+}
+
+// Inserção na tabela hash 
 int inserir_hash(tabelaHash* h, char* chave) {
     // Proteção contra tabela cheia (fator de carga = 1)
     if (h->quantidade >= TAMANHO_TABELA) {
@@ -60,8 +80,8 @@ int inserir_hash(tabelaHash* h, char* chave) {
             return 0; 
         }
         
-        // Pula para o próximo slot, voltando ao início se chegar no fim do vetor
-        indice = (indice + 1) % TAMANHO_TABELA;
+        // Chama a sondagem linear
+        indice = sondagem_linear(indice);
     }
 
     // Insere o dado se achar uma posição livre
@@ -88,7 +108,8 @@ int buscar_hash(tabelaHash* h, char* chave) {
             return 1; 
         }
         
-        indice = (indice + 1) % TAMANHO_TABELA;
+        // Chama a sondagem linear
+        indice = sondagem_linear(indice);
         
         // Condição de parada de segurança: se deu uma volta inteira no vetor
         if (indice == indice_inicial) {
@@ -96,32 +117,28 @@ int buscar_hash(tabelaHash* h, char* chave) {
         }
     }
 
-    // Se encontrou um slot vazio (ocupado == 0) antes de achar a chave, 
-    // ou se deu a volta inteira, significa que o usuário não existe.
+    // Se encontrou um slot vazio (ocupado == 0) antes de achar a chave, ou se deu a volta inteira, significa que o usuário não existe.
     return 0; 
 }
 
 // inserção em lote a partir de um arquivo
-int inserir_lote_hash(tabelaHash* h, char* nome_arquivo) {
+void inserir_lote_hash(tabelaHash* h, char* nome_arquivo) {
     FILE *arquivo = fopen(nome_arquivo, "r");
     
     if (arquivo == NULL) {
-        printf("Erro: Nao foi possivel abrir o arquivo '%s'.\n", nome_arquivo);
-        return 0;
+        printf("Erro: Não foi possível abrir o arquivo '%s'.\n", nome_arquivo);
+        return;
     }
 
     char usuario[20];
-    int cadastrados_nesta_execucao = 0;
 
     // Lê até o fim do arquivo (usando limite de 19 chars para não estourar o buffer)
     while (fscanf(arquivo, "%19s", usuario) == 1) {
-        if (inserir_hash(h, usuario) == 1) {
-            cadastrados_nesta_execucao++;
-        }
+        inserir_hash(h, usuario);
     }
 
     fclose(arquivo);
-    return cadastrados_nesta_execucao;
+    return;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
