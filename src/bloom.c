@@ -43,3 +43,8 @@ Filtrodebloom criar_filtro(int n){
 
     return bloom;
 }
+
+void liberar_filtro(Filtrodebloom *bloom){
+    //Libera a memória
+    free(bloom->vetor);
+}
