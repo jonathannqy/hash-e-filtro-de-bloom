@@ -1,0 +1,160 @@
+RESULTADOS DO TESTE SEM FILTRO DE BLOOM: 
+
+TESTE COM ARQUIVO DE 1K USUÁRIOS 
+
+Tabela 4001 
+
+Primeiro teste:
+245 microssegundos. 
+
+Segundo teste:
+194 microssegundos. 
+
+Terceiro teste:
+210 microssegundos. 
+
+245 + 194 + 210 = 649 ÷ 3
+
+RESULTADO FINAL = 216,3 MÉDIA TOTAL 
+  
+  \\\\\\\\\\\\\\\\\
+
+Tabela 1999
+
+Primeiro teste:
+306 microssegundos.
+
+Segundo teste 
+206 microssegundos. 
+
+Terceiro teste
+188 microssegundos. 
+
+306 + 206 + 188 = 700 ÷ 3
+
+ RESULTADO FINAL = 233,3 MÉDIA TOTAL
+
+\\\\\\\\\\\\\\\\\\\\
+
+Tabela 1361 
+
+Primeiro teste:
+211 microssegundos.
+
+Segundo teste 
+206 microssegundos.
+
+Terceiro teste 
+216 microssegundos. 
+
+211 + 206 + 216 = 633 ÷ 3
+
+RESULTADO FINAL = 211 MÉDIA TOTAL
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+TESTE COM ARQUIVO DE 10K USUÁRIOS 
+
+Tabela 40009 
+
+Primeiro teste:
+1.729 microssegundos. 
+
+Segundo teste:
+1.971 microssegundos. 
+
+Terceiro teste:
+1.728 microssegundos. 
+
+1.729 + 1.971 + 17.28 = 5.428 ÷ 3 
+
+RESULTADO FINAL = 1.809,3 MÉDIA TOTAL
+
+\\\\\\\\\\\\\\\\\\\\
+
+Tabela 20011
+
+Primeiro teste:
+1.756 microssegundos. 
+
+Segundo teste:
+1.912 microssegundos.
+
+Terceiro teste:
+2.050 microssegundos. 
+
+1.756 + 1.912 + 2.050 = 5.718 ÷ 3
+
+RESULTADO FINAL = 1.906 MÉDIA TOTAL
+
+\\\\\\\\\\\\\\\\\\\\\
+
+Tabela 13337
+
+Primeiro teste: 
+1.590 microssegundos. 
+
+Segundo teste
+2.095 microssegundos. 
+
+Terceiro teste:
+848 microssegundos. 
+
+1.590 + 2.095 + 848 = 4.533 ÷ 3 
+
+RESULTADO FINAL = 1.511 MÉDIA TOTAL 
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+TESTE COM ARQUIVO DE 100kK USUÁRIOS 
+
+Tabela 400009
+
+Primeiro teste:
+14.602 microssegundos. 
+
+Segundo teste:
+11.818 microssegundos.
+
+Terceiro teste:
+14.378 microssegundos. 
+
+14.602 + 11.818 + 14.378 = 40.798 ÷ 3 
+
+RESULTADO FINAL = 13.599,3 MÉDIA TOTAL
+
+\\\\\\\\\\\\\\\\\\\\
+
+Tabela 20003
+
+Primeiro teste:
+14.237 microssegundos. 
+
+Segundo teste:
+17.013 microssegundos.
+
+Terceiro teste:
+17.861 microssegundos. 
+
+14.237 + 17.013 + 17.861 = 49.111 ÷ 3 
+
+RESULTADO FINAL = 6.370,3 MÉDIA TOTAL
+
+\\\\\\\\\\\\\\\\\\\
+
+Tabela 133379
+
+Primeiro teste:
+15.600 microssegundos.
+
+Segundo teste:
+18.431 microssegundos. 
+
+Terceiro teste:
+19.152 microssegundos.
+
+15.600 + 18.431 + 19.152 = 53.183 ÷ 3 
+
+RESULTADO FINAL = 7.727,6 MÉDIA TOTAL 
+
+
