@@ -6,6 +6,7 @@
 // 100003 é um número primo adequado para evitar colisões com até 100000 entradas.
 #define TAMANHO_TABELA 100003 
 
+// Funções principais
 void inicializarHash(tabelaHash* h) {
     // Aloca o vetor de elementos com base no tamanho definido
     h->tabela = (elementoHash*)malloc(TAMANHO_TABELA * sizeof(elementoHash));
@@ -24,6 +25,10 @@ void liberarHash(tabelaHash* h) {
     }
     h->quantidade = 0;
 }
+////////////////////////////////////////////////////////////////////////////////////
+
+
+// Funções do nosso método hash
 
 // Método da divisão
 int hash_divisao(char* chave) {
@@ -118,7 +123,12 @@ int inserir_lote_hash(tabelaHash* h, char* nome_arquivo) {
     fclose(arquivo);
     return cadastrados_nesta_execucao;
 }
+////////////////////////////////////////////////////////////////////////////////////
 
+
+
+// Função auxiliar
 int quantidade_registros(tabelaHash* h) {
     return h->quantidade;
 }
+////////////////////////////////////////////////////////////////////////////////////
