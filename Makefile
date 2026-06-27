@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -g -I./src
-SRC = src/main.c src/hash.c src/script.c 
+SRC = src/main.c src/hash.c src/bloom.c src/script.c 
 TARGET = exec
 
 
