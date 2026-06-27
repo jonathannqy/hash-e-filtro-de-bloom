@@ -85,7 +85,7 @@ int main() {
                 }
 
                 int fim = parar_cronometro(inicio);
-                printf("Tempo de inserção: %d ms\n", fim - inicio); 
+                printf("Tempo de inserção: %d microssegundos\n", fim - inicio); 
 
                 break;
             }
@@ -129,6 +129,73 @@ int main() {
                 break;
             }
 
+            case 7: {
+                int lote;
+                char nome_arquivo[50];
+
+                printf("Qual lote deseja usar para o experimento de busca:\n");
+                printf("[1] Lote 1k\n");
+                printf("[2] Lote 10k\n");
+                printf("[3] Lote 100k\n");  
+                scanf("%d", &lote);
+
+                // Define o caminho do arquivo com base na escolha
+                if (lote == 1) {
+                    strcpy(nome_arquivo, "data/usuarios1k.txt");
+                }
+
+                else if (lote == 2) {
+                    strcpy(nome_arquivo, "data/usuarios10k.txt");
+                } 
+                
+                else if (lote == 3) {
+                    strcpy(nome_arquivo, "data/usuarios100k.txt");
+                } 
+                
+                else {
+                    printf("Opção inválida!\n");
+                    break;
+                }
+
+                // Abre o arquivo para leitura
+                FILE *arquivo = fopen(nome_arquivo, "r");
+                if (arquivo == NULL) {
+                    printf("Erro: Arquivo '%s' não encontrado. Gere o lote primeiro.\n", nome_arquivo);
+                    break;
+                }
+
+                char usuario[20];
+                int total_consultas = 0;
+
+                printf("Buscando todos os registros do arquivo na Tabela Hash (sem bloom)...\n");
+
+                // 1. Inicia o cronômetro
+                int tempo_inicio = iniciar_cronometro();
+
+                // Lê o arquivo linha por linha e realiza a busca na Hash
+                while (fscanf(arquivo, "%19s", usuario) == 1) {
+                    buscar_hash(&hash, usuario);
+                    total_consultas++;
+                }
+
+                // 2. Para o cronômetro
+                int tempo_total = parar_cronometro(tempo_inicio);
+
+                fclose(arquivo);
+
+                // 3. Imprime os resultados
+                printf("\n--- RESULTADOS DO EXPERIMENTO (SEM BLOOM) ---\n");
+                printf("Arquivo testado: %s\n", nome_arquivo);
+                printf("Quantidade de buscas: %d\n", total_consultas);
+                printf("Tempo total gasto: %d microssegundos.\n", tempo_total);
+                
+                if (total_consultas > 0) {
+                    printf("Tempo médio por busca: %.4f microssegundos.\n", (double)tempo_total / total_consultas);
+                }
+                
+                break;
+            }
+
             case 0: {
                 printf("Limpando tabela hash..\n");
                 liberar_hash(&hash);
@@ -162,6 +229,7 @@ void menu_principal() {
     printf("[4] Inserir lote\n");
     printf("[5] Gerar lote(Arquivo)\n");
     printf("[6] Quantidade de registros\n");
+    printf("[7] Roda experimento de busca (sem bloom)\n");
     printf("[0] Sair\n");
     printf("Escolha uma opção: ");
 }
