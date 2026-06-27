@@ -8,6 +8,8 @@
 
 
 void menu_principal();
+int iniciar_cronometro();
+int parar_cronometro(int inicio);
 
 int main() {
 
@@ -68,6 +70,8 @@ int main() {
                 printf("[3] Lote 100k\n");  
                 scanf("%d", &lote);
 
+                int inicio = iniciar_cronometro();
+
                 if (lote == 1) {
                     inserir_lote_hash(&hash, "data/usuarios1k.txt");
                 } 
@@ -80,6 +84,8 @@ int main() {
                     inserir_lote_hash(&hash, "data/usuarios100k.txt");
                 }
 
+                int fim = parar_cronometro(inicio);
+                printf("Tempo de inserção: %d ms\n", fim - inicio); 
 
                 break;
             }
@@ -158,4 +164,18 @@ void menu_principal() {
     printf("[6] Quantidade de registros\n");
     printf("[0] Sair\n");
     printf("Escolha uma opção: ");
+}
+
+int iniciar_cronometro(){
+    //A função clock vai pegar o tempo de cpu e guardar em um int normal
+    return clock();
+}
+
+int parar_cronometro(int inicio){
+    int fim = clock();
+
+    //Multiplica o resultado em 1.000.000 para sair em microssegundos.
+    int tempo_gasto = ((fim - inicio) * 1000000) /CLOCKS_PER_SEC;
+
+    return tempo_gasto;
 }
