@@ -53,7 +53,11 @@ void liberar_filtro(Filtrodebloom *bloom){
 int hash_auxiliar(int chave, int tamanho) {
     
     int resultado = (chave * 31) % tamanho;
-    if (resultado < 0) resultado = -resultado;
+
+    if (resultado < 0){
+        resultado = (resultado * (-1));
+    }
+
     return resultado;
 }
 
@@ -71,7 +75,7 @@ void inserir_bloom(Filtrodebloom *bloom, char *item){
      
     //Garante que não tenha indice negativo
     if(pos < 0){
-        pos = -pos;
+        pos = (pos * (-1));
     }
         //Marca o bit no vetor
         marcar_bit(bloom->vetor, pos);

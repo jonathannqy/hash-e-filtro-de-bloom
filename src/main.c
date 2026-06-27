@@ -11,6 +11,7 @@
 void menu_principal();
 int iniciar_cronometro();
 int parar_cronometro(int inicio);
+void inserir_lote_completo(tabelaHash* h, Filtrodebloom* b, char* nome_arquivo);
 
 int main() {
 
@@ -49,23 +50,23 @@ int main() {
 
             case 2: {
                 printf("Digite o identificador para consulta: ");
-                scanf("%49s", identificador);
+                scanf("%19s", identificador);
 
                 if (consultar_bloom(&bloom, identificador) == 0) {
                     //Se retornar 0, o usuario com certeza não existe
-                    printf("O usuario '%s' não existe\n", identificador);
+                    printf("O usuário '%s' não existe\n", identificador);
                 }
 
                 else {
                 //Se retornar 1, o usuário possivelmente existe
-                printf("O usuario '%s' possivelmente existe. Verificando na tabela hash...\n", identificador);
+                printf("O usuário '%s' possivelmente existe. Verificando na tabela hash...\n", identificador);
 
                     //Verificando a tabela hash
                     if (buscar_hash(&hash, identificador) == 1) {
-                        printf("Usuario '%s' encontrado na tabela hash!\n", identificador);
+                        printf("Usuário '%s' encontrado na tabela hash!\n", identificador);
                     } 
                     else {
-                        printf("O usuario '%s' não existe. É um falso positivo\n", identificador);
+                        printf("O usuário '%s' não existe. É um falso positivo\n", identificador);
                     }
                 }
 
@@ -88,15 +89,15 @@ int main() {
                 scanf("%d", &lote);
 
                 if (lote == 1) {
-                    inserir_lote_hash(&hash, "data/usuarios1k.txt");
+                    inserir_lote_completo(&hash, &bloom, "data/usuarios1k.txt");
                 } 
                 
                 else if (lote == 2) {
-                    inserir_lote_hash(&hash, "data/usuarios10k.txt");
+                    inserir_lote_completo(&hash, &bloom, "data/usuarios10k.txt");
                 }
                 
                 else if (lote == 3) {
-                    inserir_lote_hash(&hash, "data/usuarios100k.txt");
+                    inserir_lote_completo(&hash, &bloom, "data/usuarios100k.txt");
                 }
 
                 break;
@@ -255,4 +256,23 @@ int parar_cronometro(int inicio){
     int tempo_gasto = ((fim - inicio) * 1000000) /CLOCKS_PER_SEC;
 
     return tempo_gasto;
+}
+
+void inserir_lote_completo(tabelaHash* h, Filtrodebloom* b, char* nome_arquivo) {
+    FILE *arquivo = fopen(nome_arquivo, "r");
+    
+    if (arquivo == NULL) {
+        printf("Erro: Não foi possível abrir o arquivo '%s'.\n", nome_arquivo);
+        return;
+    }
+
+    char usuario[20];
+
+    while (fscanf(arquivo, "%19s", usuario) == 1) {
+        inserir_hash(h, usuario);
+        inserir_bloom(b, usuario);
+    }
+
+    fclose(arquivo);
+    printf("Lote carregado com sucesso no Hash e no Bloom!\n");
 }
