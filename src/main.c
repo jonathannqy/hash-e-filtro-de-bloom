@@ -119,7 +119,7 @@ int main() {
             }
 
             case 6: {
-                printf("Quantidade de registros: %d\n", hash.quantidade);
+                printf("Quantidade de registros: %d\n", quantidade_registros(&hash));
                 break;
             }
 
@@ -144,8 +144,6 @@ int main() {
         }
 
     } while (opcao != 0);
-
-    // TODO: Liberar memoria alocada para a Hash e para o vetor de bits do Bloom (se houver)
 
     return 0;
 }

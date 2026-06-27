@@ -6,6 +6,21 @@
 // 100003 é um número primo adequado para evitar colisões com até 100000 entradas.
 #define TAMANHO_TABELA 100003 
 
+// Tamanhos ideais para um lote de 1000:
+// #define TAMANHO_TABELA 4001 // FC = 25%.
+// #define TAMANHO_TABELA 1999 // FC = 50%.
+// #define TAMANHO_TABELA 1361 // FC = 75%.
+
+// Tamanhos ideais para um lote de 10.000:
+//#define TAMANHO_TABELA 40009 // FC = 0.25 = 25%.
+// #define TAMANHO_TABELA 20011 // FC = 50%.
+// #define TAMANHO_TABELA  13337 // FC = 75%.
+
+// Tamanhos ideais para um lote de 100.000:
+//#define TAMANHO_TABELA 400009 // FC = 0.25 = 25%. 
+// #define TAMANHO_TABELA  200003 // FC = 50%.
+// #define TAMANHO_TABELA  133379 // FC = 75%.
+
 // Funções principais
 void inicializar_hash(tabelaHash* h) {
     // Aloca o vetor de elementos com base no tamanho definido
@@ -113,13 +128,7 @@ void inserir_lote_hash(tabelaHash* h, char* nome_arquivo) {
 
     // Lê até o fim do arquivo (usando limite de 19 chars para não estourar o buffer)
     while (fscanf(arquivo, "%19s", usuario) == 1) {
-        if (inserir_hash(h, usuario) == 1) {
-            printf("Inserido: %s\n", usuario);
-        }
-         
-        else {
-            printf("Erro ao inserir: %s\n", usuario);
-        }
+        inserir_hash(h, usuario);
     }
 
     fclose(arquivo);
