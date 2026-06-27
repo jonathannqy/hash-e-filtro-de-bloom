@@ -5,6 +5,7 @@
 
 #include "hash.h"
 #include "script.h"
+#include "bloom.h"
 
 
 void menu_principal();
@@ -38,7 +39,8 @@ int main() {
                 scanf("%49s", identificador);
 
                 inserir_hash(&hash, identificador);
-                // Inserir no bloom depois
+                inserir_bloom(&bloom, identificador);
+                
 
                 printf("Usuário %s inserido com sucesso (Hash).\n", identificador);
                 break;
