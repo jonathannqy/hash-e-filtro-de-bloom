@@ -19,6 +19,7 @@ int main() {
     //////////////////////////////
 
     // Inicializando o filtro de Bloom
+    Filtrodebloom bloom = criar_filtro(100000);
     //////////////////////////////
 
     int opcao;
