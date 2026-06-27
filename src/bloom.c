@@ -19,3 +19,14 @@ int verificar_bit(char *vetor, int pos){
     }
     return 0; //Falso. O bit não está ligado.
 } 
+
+    //Essa função vai ligar um bit especifico dentro do vetor
+    void marcar_bit(char *vetor, int pos){
+    int byte_posicao = pos / 8;
+    int bit_posicao = pos % 8;
+
+    //Garante que a soma so aconteça em bits desligados
+    if(verificar_bit(vetor, pos) == 0){
+        vetor[byte_posicao] = vetor[byte_posicao] + potencias_de_dois[bit_posicao];
+    }
+}
