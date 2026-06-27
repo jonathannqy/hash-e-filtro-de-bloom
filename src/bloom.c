@@ -68,7 +68,7 @@ void inserir_bloom(Filtrodebloom *bloom, char *item){
   
   for(i = 0; i < bloom->k; i++){
     //Fórmula matemática do filtro de bloom
-    int pos = (h1 * i * h2) % bloom->m;
+    int pos = (h1 + i * h2) % bloom->m;
      
     //Garante que não tenha indice negativo
     if(pos < 0){

@@ -4,7 +4,7 @@
 #include "hash.h"
  
 // 100003 é um número primo adequado para evitar colisões com até 100000 entradas.
-#define TAMANHO_TABELA 100003 
+#define TAMANHO_TABELA 1999
 
 // Tamanhos ideais para um lote de 1000:
 // #define TAMANHO_TABELA 4001 // FC = 25%.
