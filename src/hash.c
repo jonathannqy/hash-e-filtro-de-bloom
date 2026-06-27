@@ -4,7 +4,7 @@
 #include "hash.h"
  
 // 100003 é um número primo adequado para evitar colisões com até 100000 entradas.
-#define TAMANHO_TABELA 1999
+#define TAMANHO_TABELA 4001
 
 // Tamanhos ideais para um lote de 1000:
 // #define TAMANHO_TABELA 4001 // FC = 25%.
@@ -25,7 +25,7 @@
 void inicializar_hash(tabelaHash* h) {
     // Aloca o vetor de elementos com base no tamanho definido
     h->tabela = (elementoHash*)malloc(TAMANHO_TABELA * sizeof(elementoHash));
-    h->quantidade = 0;
+    h->quantidade = 0; // de registrados na tabela hash
 
     // Inicializa todos os slots como vazios
     for (int i = 0; i < TAMANHO_TABELA; i++) {
@@ -147,5 +147,9 @@ void inserir_lote_hash(tabelaHash* h, char* nome_arquivo) {
 // Função auxiliar
 int quantidade_registros(tabelaHash* h) {
     return h->quantidade;
+}
+
+int tamanho_tabela() {
+    return TAMANHO_TABELA;
 }
 ////////////////////////////////////////////////////////////////////////////////////

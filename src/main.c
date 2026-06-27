@@ -42,7 +42,7 @@ int main() {
                 inserir_bloom(&bloom, identificador);
                 
 
-                printf("Usuário %s inserido com sucesso (Hash).\n", identificador);
+                printf("Usuário %s inserido com sucesso (Hash + Bloom).\n", identificador);
                 break;
             }
 
@@ -51,23 +51,26 @@ int main() {
                 printf("Digite o identificador para consulta: ");
                 scanf("%49s", identificador);
 
-            if (consultar_bloom(&bloom, identificador) == 0) {
-            //Se retornar 0, o usuario com certeza não existe
-            printf("O usuario '%s' não existe\n", identificador);
-            }
-            else {
-            //Se retornar 1, o usuario possivelmente existe
-            printf("O usuario '%s' possivelmente existe. Verificando na tabela hash...\n", identificador);
+                if (consultar_bloom(&bloom, identificador) == 0) {
+                    //Se retornar 0, o usuario com certeza não existe
+                    printf("O usuario '%s' não existe\n", identificador);
+                }
 
-            //Verificando a tabela hash
-            if (buscar_hash(&hash, identificador) == 1) {
-            printf("Usuario '%s' encontrado na tabela hash!\n", identificador);
-        } else {
-            printf("O usuario '%s' não existe. É um falso positivo\n", identificador);
-        }
-    }
+                else {
+                //Se retornar 1, o usuário possivelmente existe
+                printf("O usuario '%s' possivelmente existe. Verificando na tabela hash...\n", identificador);
+
+                    //Verificando a tabela hash
+                    if (buscar_hash(&hash, identificador) == 1) {
+                        printf("Usuario '%s' encontrado na tabela hash!\n", identificador);
+                    } 
+                    else {
+                        printf("O usuario '%s' não existe. É um falso positivo\n", identificador);
+                    }
+                }
+
                 break;
-}
+            }
             
 
             case 3: {
@@ -84,8 +87,6 @@ int main() {
                 printf("[3] Lote 100k\n");  
                 scanf("%d", &lote);
 
-                int inicio = iniciar_cronometro();
-
                 if (lote == 1) {
                     inserir_lote_hash(&hash, "data/usuarios1k.txt");
                 } 
@@ -97,9 +98,6 @@ int main() {
                 else if (lote == 3) {
                     inserir_lote_hash(&hash, "data/usuarios100k.txt");
                 }
-
-                int fim = parar_cronometro(inicio);
-                printf("Tempo de inserção: %d microssegundos\n", fim - inicio); 
 
                 break;
             }
@@ -153,7 +151,6 @@ int main() {
                 printf("[3] Lote 100k\n");  
                 scanf("%d", &lote);
 
-                // Define o caminho do arquivo com base na escolha
                 if (lote == 1) {
                     strcpy(nome_arquivo, "data/usuarios1k.txt");
                 }
@@ -192,16 +189,17 @@ int main() {
                     total_consultas++;
                 }
 
-                // 2. Para o cronômetro
+                // Para o cronômetro
                 int tempo_total = parar_cronometro(tempo_inicio);
 
                 fclose(arquivo);
 
-                // 3. Imprime os resultados
+                // Imprime os resultados
                 printf("\n--- RESULTADOS DO EXPERIMENTO (SEM BLOOM) ---\n");
                 printf("Arquivo testado: %s\n", nome_arquivo);
                 printf("Quantidade de buscas: %d\n", total_consultas);
                 printf("Tempo total gasto: %d microssegundos.\n", tempo_total);
+                printf("Tamanho da tabela Hash: %d\n", tamanho_tabela()); 
                 
                 if (total_consultas > 0) {
                     printf("Tempo médio por busca: %.4f microssegundos.\n", (double)tempo_total / total_consultas);
@@ -214,15 +212,12 @@ int main() {
                 printf("Limpando tabela hash..\n");
                 liberar_hash(&hash);
 
-                /*
                 printf("Limpando filtro de Bloom..\n");
-                liberar_filtro(&meu_filtro);
-                */
+                liberar_filtro(&bloom);
 
                 printf("Encerrando o sistema...\n");
                 break;
            }
-
 
             default: {
                 printf("Opção inválida! Tente novamente.\n");

@@ -28,5 +28,6 @@ void inserir_lote_hash(tabelaHash* h, char* nome_arquivo);
 
 // Funções auxiliares
 int quantidade_registros(tabelaHash* h);
+int tamanho_tabela();
 
 #endif
