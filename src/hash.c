@@ -57,7 +57,12 @@ int hash_divisao(char* chave) {
     return soma % TAMANHO_TABELA;
 }
 
-// Inserção com sondagem linear
+// Função da sondagem linear
+int sondagem_linear(int indice_atual) {
+    return (indice_atual + 1) % TAMANHO_TABELA;
+}
+
+// Inserção na tabela hash 
 int inserir_hash(tabelaHash* h, char* chave) {
     // Proteção contra tabela cheia (fator de carga = 1)
     if (h->quantidade >= TAMANHO_TABELA) {
@@ -75,8 +80,8 @@ int inserir_hash(tabelaHash* h, char* chave) {
             return 0; 
         }
         
-        // Pula para o próximo slot, voltando ao início se chegar no fim do vetor
-        indice = (indice + 1) % TAMANHO_TABELA;
+        // Chama a sondagem linear
+        indice = sondagem_linear(indice);
     }
 
     // Insere o dado se achar uma posição livre
@@ -103,7 +108,8 @@ int buscar_hash(tabelaHash* h, char* chave) {
             return 1; 
         }
         
-        indice = (indice + 1) % TAMANHO_TABELA;
+        // Chama a sondagem linear
+        indice = sondagem_linear(indice);
         
         // Condição de parada de segurança: se deu uma volta inteira no vetor
         if (indice == indice_inicial) {

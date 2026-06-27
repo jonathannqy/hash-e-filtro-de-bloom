@@ -21,6 +21,7 @@ void liberar_hash(tabelaHash* h);
 
 // Funções do nosso metodo hash
 int hash_divisao(char* chave);
+int sondagem_linear(int indice_atual);
 int inserir_hash(tabelaHash* h, char* chave);
 int buscar_hash(tabelaHash* h, char* chave);
 void inserir_lote_hash(tabelaHash* h, char* nome_arquivo);
