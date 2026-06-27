@@ -16,14 +16,14 @@ typedef struct {
 } tabelaHash;
 
 // Funções principais 
-void inicializarHash(tabelaHash* h);
-void liberarHash(tabelaHash* h);
+void inicializar_hash(tabelaHash* h);
+void liberar_hash(tabelaHash* h);
 
 // Funções do nosso metodo hash
 int hash_divisao(char* chave);
 int inserir_hash(tabelaHash* h, char* chave);
 int buscar_hash(tabelaHash* h, char* chave);
-int inserir_lote_hash(tabelaHash* h, char* nome_arquivo);
+void inserir_lote_hash(tabelaHash* h, char* nome_arquivo);
 
 // Funções auxiliares
 int quantidade_registros(tabelaHash* h);

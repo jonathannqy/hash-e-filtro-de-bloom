@@ -7,7 +7,7 @@
 #define TAMANHO_TABELA 100003 
 
 // Funções principais
-void inicializarHash(tabelaHash* h) {
+void inicializar_hash(tabelaHash* h) {
     // Aloca o vetor de elementos com base no tamanho definido
     h->tabela = (elementoHash*)malloc(TAMANHO_TABELA * sizeof(elementoHash));
     h->quantidade = 0;
@@ -18,7 +18,7 @@ void inicializarHash(tabelaHash* h) {
     }
 }
 
-void liberarHash(tabelaHash* h) {
+void liberar_hash(tabelaHash* h) {
     if (h->tabela != NULL) {
         free(h->tabela);
         h->tabela = NULL;
@@ -96,32 +96,34 @@ int buscar_hash(tabelaHash* h, char* chave) {
         }
     }
 
-    // Se encontrou um slot vazio (ocupado == 0) antes de achar a chave, 
-    // ou se deu a volta inteira, significa que o usuário não existe.
+    // Se encontrou um slot vazio (ocupado == 0) antes de achar a chave, ou se deu a volta inteira, significa que o usuário não existe.
     return 0; 
 }
 
 // inserção em lote a partir de um arquivo
-int inserir_lote_hash(tabelaHash* h, char* nome_arquivo) {
+void inserir_lote_hash(tabelaHash* h, char* nome_arquivo) {
     FILE *arquivo = fopen(nome_arquivo, "r");
     
     if (arquivo == NULL) {
-        printf("Erro: Nao foi possivel abrir o arquivo '%s'.\n", nome_arquivo);
-        return 0;
+        printf("Erro: Não foi possível abrir o arquivo '%s'.\n", nome_arquivo);
+        return;
     }
 
     char usuario[20];
-    int cadastrados_nesta_execucao = 0;
 
     // Lê até o fim do arquivo (usando limite de 19 chars para não estourar o buffer)
     while (fscanf(arquivo, "%19s", usuario) == 1) {
         if (inserir_hash(h, usuario) == 1) {
-            cadastrados_nesta_execucao++;
+            printf("Inserido: %s\n", usuario);
+        }
+         
+        else {
+            printf("Erro ao inserir: %s\n", usuario);
         }
     }
 
     fclose(arquivo);
-    return cadastrados_nesta_execucao;
+    return;
 }
 ////////////////////////////////////////////////////////////////////////////////////
 
