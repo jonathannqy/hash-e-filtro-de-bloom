@@ -49,6 +49,14 @@ void liberar_filtro(Filtrodebloom *bloom){
     free(bloom->vetor);
 }
 
+//Funçãao hash auxiliar para espalhar melhor os indices
+int hash_auxiliar(int chave, int tamanho) {
+    
+    int resultado = (chave * 31) % tamanho;
+    if (resultado < 0) resultado = -resultado;
+    return resultado;
+}
+
 void inserir_bloom(Filtrodebloom *bloom, char *item){
   int chave = texto_para_int(item);
 
