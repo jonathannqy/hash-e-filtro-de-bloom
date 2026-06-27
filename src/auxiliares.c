@@ -10,6 +10,7 @@ void menu_principal() {
     printf("[5] Gerar lote(Arquivo)\n");
     printf("[6] Quantidade de registros\n");
     printf("[7] Roda experimento de busca (sem bloom)\n");
+    printf("[8] Roda experimento de busca (com bloom)\n");
     printf("[0] Sair\n");
     printf("Escolha uma opção: ");
 }
