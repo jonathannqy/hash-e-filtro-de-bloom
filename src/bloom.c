@@ -78,3 +78,27 @@ void inserir_bloom(Filtrodebloom *bloom, char *item){
         marcar_bit(bloom->vetor, pos);
   }
 }
+
+int consultar_bloom(Filtrodebloom *bloom, char *item){
+    int chave = texto_para_int(item);
+
+    //Calcula os dois hash usando métodos diferentes
+    int h1 = hash_divisao(item); 
+    int h2 = hash_auxiliar(chave, bloom->m);
+    
+    int i;
+    for (i = 0; i < bloom->k; i++) {
+
+        //Calcula a posição exata do bit
+        int pos = (h1 + i * h2) % bloom->m;
+        if (pos < 0) pos = -pos;
+        
+        //Se achou algum bit zero vai retornar que o item não existe de forma alguma
+        if (verificar_bit(bloom->vetor, pos) == 0) {
+            return 0; 
+        }
+    }
+
+    //Vai retornar que possivelmente existe(e pode conter falsos positivos)
+    return 1; 
+}
