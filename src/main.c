@@ -49,13 +49,24 @@ int main() {
                 printf("Digite o identificador para consulta: ");
                 scanf("%49s", identificador);
 
-                // Fluxo obrigatorio:
-                // 1. Consultar Filtro de Bloom
-                // 2. Se nao existe no Bloom -> "definitivamente nao existe" 
-                // 3. Se possivelmente existe -> Consultar Tabela Hash 
-                break;
-
+            if (consultar_bloom(&bloom, identificador) == 0) {
+            //Se retornar 0, o usuario com certeza não existe
+            printf("O usuario '%s' não existe\n", identificador);
             }
+            else {
+            //Se retornar 1, o usuario possivelmente existe
+            printf("O usuario '%s' possivelmente existe. Verificando na tabela hash...\n", identificador);
+
+            //Verificando a tabela hash
+            if (buscar_hash(&hash, identificador) == 1) {
+            printf("Usuario '%s' encontrado na tabela hash!\n", identificador);
+        } else {
+            printf("O usuario '%s' não existe. É um falso positivo\n", identificador);
+        }
+    }
+                break;
+}
+            
 
             case 3: {
                 printf("\n--- Estatisticas do Sistema ---\n");
