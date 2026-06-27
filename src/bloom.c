@@ -48,3 +48,25 @@ void liberar_filtro(Filtrodebloom *bloom){
     //Libera a memória
     free(bloom->vetor);
 }
+
+void inserir_bloom(Filtrodebloom *bloom, char *item){
+  int chave = texto_para_int(item);
+
+  //Funções para gerar o indice do número
+  int h1 = hash_divisao(item);
+  int h2 = hash_auxiliar(chave, bloom->m);
+
+  int i;
+  
+  for(i = 0; i < bloom->k; i++){
+    //Fórmula matemática do filtro de bloom
+    int pos = (h1 * i * h2) % bloom->m;
+     
+    //Garante que não tenha indice negativo
+    if(pos < 0){
+        pos = -pos;
+    }
+        //Marca o bit no vetor
+        marcar_bit(bloom->vetor, pos);
+  }
+}
