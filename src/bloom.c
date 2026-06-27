@@ -58,11 +58,10 @@ int hash_auxiliar(int chave, int tamanho) {
 }
 
 void inserir_bloom(Filtrodebloom *bloom, char *item){
-  int chave = texto_para_int(item);
 
   //Funções para gerar o indice do número
   int h1 = hash_divisao(item);
-  int h2 = hash_auxiliar(chave, bloom->m);
+  int h2 = hash_auxiliar(h1, bloom->m);
 
   int i;
   
@@ -80,11 +79,10 @@ void inserir_bloom(Filtrodebloom *bloom, char *item){
 }
 
 int consultar_bloom(Filtrodebloom *bloom, char *item){
-    int chave = texto_para_int(item);
 
     //Calcula os dois hash usando métodos diferentes
     int h1 = hash_divisao(item); 
-    int h2 = hash_auxiliar(chave, bloom->m);
+    int h2 = hash_auxiliar(h1, bloom->m);
     
     int i;
     for (i = 0; i < bloom->k; i++) {
