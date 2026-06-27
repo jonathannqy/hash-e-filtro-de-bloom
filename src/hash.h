@@ -1,9 +1,9 @@
 #ifndef HASH_H
 #define HASH_H
 
-// O tamanho da tabela deve ser um numero primo longe de uma potência de 2 para diminuir colisões com o método da divisão.
-
-// Estrutura para armazenar o dado do usuário
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 typedef struct {
     char identificador[20];
     int ocupado; 

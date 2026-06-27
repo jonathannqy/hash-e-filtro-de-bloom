@@ -3,7 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
 typedef struct {
     int m; //Tamanho de bits
     int k; //Funcões hash

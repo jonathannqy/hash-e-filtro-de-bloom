@@ -1,17 +1,12 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <time.h>
-
-#include "hash.h"
 #include "script.h"
-#include "bloom.h"
+#include "auxiliares.h"
 
-
-void menu_principal();
-int iniciar_cronometro();
-int parar_cronometro(int inicio);
-void inserir_lote_completo(tabelaHash* h, Filtrodebloom* b, char* nome_arquivo);
+typedef struct {
+    int total_consultas;
+    int consultas_evitadas;
+    int falsos_positivos;
+    int tempo_total_consultas; // Guarda a soma dos tempos em microssegundos
+} Estatisticas;
 
 int main() {
 
@@ -22,6 +17,10 @@ int main() {
 
     // Inicializando o filtro de Bloom
     Filtrodebloom bloom = criar_filtro(100000);
+    //////////////////////////////
+
+    // Inicializando as estatísticas
+    Estatisticas status = {0, 0, 0, 0};
     //////////////////////////////
 
     int opcao;
@@ -52,9 +51,16 @@ int main() {
                 printf("Digite o identificador para consulta: ");
                 scanf("%19s", identificador);
 
+                // Regista uma consulta
+                status.total_consultas++;
+                int tempo_inicial = iniciar_cronometro();
+
                 if (consultar_bloom(&bloom, identificador) == 0) {
                     //Se retornar 0, o usuario com certeza não existe
                     printf("O usuário '%s' não existe\n", identificador);
+
+                    // Regista uma consulta evitada
+                    status.consultas_evitadas++;
                 }
 
                 else {
@@ -67,8 +73,14 @@ int main() {
                     } 
                     else {
                         printf("O usuário '%s' não existe. É um falso positivo\n", identificador);
+
+                        // Regista um falso positivo
+                        status.falsos_positivos++;
                     }
                 }
+
+                // Regista o tempo de consulta
+                status.tempo_total_consultas += parar_cronometro(tempo_inicial);
 
                 break;
             }
@@ -76,6 +88,25 @@ int main() {
 
             case 3: {
                 printf("\n--- Estatisticas do Sistema ---\n");
+                
+                printf("Quantidade de elementos armazenados: %d\n", quantidade_registros(&hash));
+                printf("Quantidade de consultas realizadas: %d\n", status.total_consultas);
+                printf("Consultas evitadas pela Bloom: %d\n", status.consultas_evitadas);
+                printf("Número de falsos positivos: %d\n", status.falsos_positivos);
+
+                if (status.total_consultas > 0) {
+                    double taxa_fp = ((double)status.falsos_positivos / status.total_consultas) * 100.0;
+                    double tempo_medio = (double)status.tempo_total_consultas / status.total_consultas;
+                    
+                    printf("Taxal de falsos positivos: %.2f%%\n", taxa_fp);
+                    printf("Tempo médio de consulta: %.2f microssegundos\n", tempo_medio);
+                }
+
+                else {
+                    printf("Taxa de falsos positivos: 0.00%%\n");
+                    printf("Tempo médio de consulta: 0.00 microssegundos\n");
+                }                
+
                 break;
             }
 
@@ -229,50 +260,4 @@ int main() {
     } while (opcao != 0);
 
     return 0;
-}
-
-void menu_principal() {
-    printf("\n--- Sistema de Verificacao de Cadastro ---\n");
-    printf("[1] Inserir novo usuário\n");
-    printf("[2] Consultar usuário\n");
-    printf("[3] Exibir estatísticas\n");
-    printf("[4] Inserir lote\n");
-    printf("[5] Gerar lote(Arquivo)\n");
-    printf("[6] Quantidade de registros\n");
-    printf("[7] Roda experimento de busca (sem bloom)\n");
-    printf("[0] Sair\n");
-    printf("Escolha uma opção: ");
-}
-
-int iniciar_cronometro(){
-    //A função clock vai pegar o tempo de cpu e guardar em um int normal
-    return clock();
-}
-
-int parar_cronometro(int inicio){
-    int fim = clock();
-
-    //Multiplica o resultado em 1.000.000 para sair em microssegundos.
-    int tempo_gasto = ((fim - inicio) * 1000000) /CLOCKS_PER_SEC;
-
-    return tempo_gasto;
-}
-
-void inserir_lote_completo(tabelaHash* h, Filtrodebloom* b, char* nome_arquivo) {
-    FILE *arquivo = fopen(nome_arquivo, "r");
-    
-    if (arquivo == NULL) {
-        printf("Erro: Não foi possível abrir o arquivo '%s'.\n", nome_arquivo);
-        return;
-    }
-
-    char usuario[20];
-
-    while (fscanf(arquivo, "%19s", usuario) == 1) {
-        inserir_hash(h, usuario);
-        inserir_bloom(b, usuario);
-    }
-
-    fclose(arquivo);
-    printf("Lote carregado com sucesso no Hash e no Bloom!\n");
 }
