@@ -1,26 +1,24 @@
 #include "bloom.h"
 #include "hash.h"
 
-int verificar_bit(char *vetor, int pos){
+int verificar_bit(unsigned char *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
+    int potencias[8] = {1, 2, 4, 8, 16, 32, 64, 128};
     
-    // Usando o operador bit a bit AND (&) e deslocamento (<<)
-    // Isso ignora sinal negativo e foca apenas no bit físico da memória
-    if (vetor[byte_posicao] & (1 << bit_posicao)) {
-        return 1; // Verdadeiro. O bit está ligado
-    }
-    return 0; // Falso. O bit não está ligado.
-} 
+    // Divisão e módulo padrão. Como é 'unsigned char', nunca fica negativo!
+    return (vetor[byte_posicao] / potencias[bit_posicao]) % 2;
+}
 
-// Essa função vai ligar um bit especifico dentro do vetor
-void marcar_bit(char *vetor, int pos){
+void marcar_bit(unsigned char *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
+    int potencias[8] = {1, 2, 4, 8, 16, 32, 64, 128};
 
-    // Usando o operador bit a bit OR (|) e deslocamento (<<)
-    // O OR garante que o bit seja ligado sem desligar os vizinhos
-    vetor[byte_posicao] |= (1 << bit_posicao);
+    // Só soma a potência se o bit estiver desligado (para não corromper o byte)
+    if (verificar_bit(vetor, pos) == 0) {
+        vetor[byte_posicao] += potencias[bit_posicao];
+    }
 }
 
 Filtrodebloom criar_filtro(int n){
