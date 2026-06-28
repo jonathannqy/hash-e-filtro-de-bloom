@@ -177,10 +177,7 @@ int main() {
                 int lote;
                 char nome_arquivo[50];
 
-                printf("Qual lote deseja usar para o experimento de busca:\n");
-                printf("[1] Lote 1k\n");
-                printf("[2] Lote 10k\n");
-                printf("[3] Lote 100k\n");  
+                menu_lote(); 
                 scanf("%d", &lote);
 
                 if (lote == 1) {
@@ -227,16 +224,8 @@ int main() {
                 fclose(arquivo);
 
                 // Imprime os resultados
-                printf("\n--- RESULTADOS DO EXPERIMENTO (SEM BLOOM) ---\n");
-                printf("Arquivo testado: %s\n", nome_arquivo);
-                printf("Quantidade de buscas: %d\n", total_consultas);
-                printf("Tempo total gasto: %d microssegundos.\n", tempo_total);
-                printf("Tamanho da tabela Hash: %d\n", tamanho_tabela()); 
-                
-                if (total_consultas > 0) {
-                    printf("Tempo médio por busca: %.4f microssegundos.\n", (double)tempo_total / total_consultas);
-                }
-                
+                resultados_sem_bloom(nome_arquivo, total_consultas, tempo_total);
+
                 break;
             }
 
@@ -244,10 +233,7 @@ int main() {
                 int lote;
                 char nome_arquivo[50];
 
-                printf("Qual lote deseja usar para o experimento de busca (com bloom):\n");
-                printf("[1] Lote 1k\n");
-                printf("[2] Lote 10k\n");
-                printf("[3] Lote 100k\n");  
+                menu_lote();
                 scanf("%d", &lote);
 
                 if (lote == 1) {
@@ -305,18 +291,28 @@ int main() {
                 fclose(arquivo);
 
                 // Imprime os resultados
-                printf("\n--- RESULTADOS DO EXPERIMENTO (COM BLOOM) ---\n");
-                printf("Arquivo testado: %s\n", nome_arquivo);
-                printf("Quantidade de buscas: %d\n", total_consultas);
-                printf("Consultas pesadas (Hash) evitadas: %d\n", consultas_evitadas);
-                printf("Falsos positivos do Bloom: %d\n", falsos_positivos);
-                printf("Tempo total gasto: %d microssegundos.\n", tempo_total);
-                printf("Tamanho da tabela Hash: %d\n", tamanho_tabela()); 
+                resultados_com_bloom(nome_arquivo, total_consultas, consultas_evitadas, falsos_positivos, tempo_total);
                 
-                if (total_consultas > 0) {
-                    printf("Tempo médio por busca: %.4f microssegundos.\n", (double)tempo_total / total_consultas);
-                    printf("Taxa de Falsos Positivos neste lote: %.2f%%\n", ((double)falsos_positivos / total_consultas) * 100.0);
+                break;
+            }     
+            
+            case 9: {
+                printf("Digite o identificador para consulta direta na Hash: ");
+                scanf("%19s", identificador);
+
+                // Inicia o cronômetro para vermos a velocidade da RAM pura
+                int tempo_inicial = iniciar_cronometro();
+
+                // Busca diretamente na tabela hash, ignorando o Bloom
+                if (buscar_hash(&hash, identificador) == 1) {
+                    printf("Usuário '%s' encontrado na tabela hash!\n", identificador);
+                } else {
+                    printf("O usuário '%s' não existe.\n", identificador);
                 }
+
+                // Para o cronômetro e imprime o tempo
+                int tempo_gasto = parar_cronometro(tempo_inicial);
+                printf("Tempo de busca na Hash: %d microssegundos.\n", tempo_gasto);
                 
                 break;
             }            
