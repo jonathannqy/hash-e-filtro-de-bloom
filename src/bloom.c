@@ -1,24 +1,26 @@
 #include "bloom.h"
 #include "hash.h"
 
-int verificar_bit(unsigned *vetor, int pos){
+int verificar_bit(unsigned char *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
 
-    int potencias_de_dois[8] = {1, 2, 4, 8, 16, 32, 64, 128}; //Vetor de potências para ligar os bits
+    //Vetor de potências de 2 para ativação e verificação de bits
+    int potencia[8] = {1, 2, 4, 8, 16, 32, 64, 128};
     
-    //Dvisão. Nunca vai ficar negativo.
-    return (vetor[byte_posicao] /  potencias_de_dois[bit_posicao]) % 2;
+    //Divisão, como tem unsigned nunca fica negativo
+    return (vetor[byte_posicao] / potencia[bit_posicao]) % 2;
+
 }
 
-void marcar_bit(unsigned *vetor, int pos){
+void marcar_bit(unsigned char *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
-    int potencias_de_dois[8] = {1, 2, 4, 8, 16, 32, 64, 128};
-
-    //Garante que a soma so aconteça em bits desligados
+    int potencia[8] = {1, 2, 4, 8, 16, 32, 64, 128};
+    
+    //Só soma a potencia se o bit estiver desligado
     if(verificar_bit(vetor, pos) == 0){
-        vetor[byte_posicao] += potencias_de_dois[bit_posicao];
+        vetor[byte_posicao] += potencia[bit_posicao];
     }
 }
 
@@ -66,7 +68,7 @@ void inserir_bloom(Filtrodebloom *bloom, char *item){
      
     //Garante que não tenha indice negativo
     if(pos < 0){
-        pos = (pos * (-1));
+        pos = -pos;
     }
         //Marca o bit no vetor
         marcar_bit(bloom->vetor, pos);
