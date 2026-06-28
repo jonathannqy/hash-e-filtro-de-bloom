@@ -6,7 +6,7 @@
 int verificar_bit(unsigned char *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
-    
+
     //Vetor de potências de 2 para ativação e verificação de bits
     int potencia[8] = {1, 2, 4, 8, 16, 32, 64, 128};
     
@@ -15,7 +15,7 @@ int verificar_bit(unsigned char *vetor, int pos){
 
 }
 
-    void marcar_bit(char *vetor, int pos){
+    void marcar_bit(unsigned char *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
     int potencia[8] = {1, 2, 4, 8, 16, 32, 64, 128};
