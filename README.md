@@ -1,8 +1,10 @@
 # Hash e Filtro de Bloom
+
 Este repositório serve como guia para executar o "Sistema de Consulta Eficiente com Tabela Hash e
 Filtro de Bloom"
 
 ## Integrantes
+
 - Breno Alves de Almeida
 - Francisco Jonathan Aquino Souza
 - Gustavo Patrício Batista
