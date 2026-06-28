@@ -6,7 +6,7 @@
 typedef struct {
     int m; //Tamanho de bits
     int k; //Funcões hash
-   unsigned char *vetor; //Aponta para a memória
+    char *vetor; //Aponta para a memória
 }Filtrodebloom;
 
 //funções filtro de bloom de (criar, liberar(free), inserir e de consultar o filtro)
