@@ -67,7 +67,7 @@ void inserir_bloom(Filtrodebloom *bloom, char *item){
      
     //Garante que não tenha indice negativo
     if(pos < 0){
-        pos = (pos * (-1));
+        pos = -pos;
     }
         //Marca o bit no vetor
         marcar_bit(bloom->vetor, pos);
