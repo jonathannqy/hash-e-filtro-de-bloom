@@ -63,6 +63,8 @@ usuarios1k.txt, usuarios10k.txt e usuarios100k.txt.
 * O tamanho da tabela hash desse sistema só pode ser alterado no arquivo "hash.c" em "TAMANHO_TABELA". Nele, há também os Fatores  
 de Carga ideais referentes a quantidade de "usuários" que serão inseridos. 
 
+* O tamanho do filtro de bloom desse sistema só pode ser alterado no arquivo "main.c" em "criar_filtro(100000)". 
+
 ### Exemplos de Execução
 
 Quando entrar no sistema, aparecerá estas opções:
