@@ -1,8 +1,6 @@
 #include "bloom.h"
 #include "hash.h"
 
-
-
 int verificar_bit(unsigned *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
@@ -13,7 +11,7 @@ int verificar_bit(unsigned *vetor, int pos){
     return (vetor[byte_posicao] /  potencias_de_dois[bit_posicao]) % 2;
 }
 
-    void marcar_bit(unsigned *vetor, int pos){
+void marcar_bit(unsigned *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
     int potencias_de_dois[8] = {1, 2, 4, 8, 16, 32, 64, 128};
