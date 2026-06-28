@@ -5,19 +5,19 @@ void menu_principal() {
     printf("\n--- Sistema de Verificação de Cadastro ---\n");
     printf("[1] Inserir novo usuário\n");
     printf("[2] Consultar usuário (com bloom)\n"); // <- Nome atualizado para clareza
-    printf("[3] Exibir estatísticas\n");
-    printf("[4] Inserir lote\n");
-    printf("[5] Gerar lote(Arquivo)\n");
-    printf("[6] Quantidade de registros\n");
-    printf("[7] Experimento de busca (sem bloom)\n");
-    printf("[8] Experimento de busca (com bloom)\n");
-    printf("[9] Consultar usuário (sem bloom)\n");   // <- NOVA OPÇÃO AQUI
+    printf("[3] Consultar usuário (sem bloom)\n");   // <- NOVA OPÇÃO AQUI
+    printf("[4] Exibir estatísticas\n");
+    printf("[5] Inserir lote\n");
+    printf("[6] Gerar lote (Arquivo)\n");
+    printf("[7] Quantidade de registros\n");
+    printf("[8] Teste de busca cronometrado (sem bloom)\n");
+    printf("[9] Teste de busca cronometrado (com bloom)\n");
     printf("[0] Sair\n");
     printf("Escolha uma opção: ");
 }
 
 void menu_lote() {
-    printf("Qual lote deseja usar para o experimento de busca:\n");
+    printf("Escolha o lote que deseja testar: \n");
     printf("[1] Lote 1k\n");
     printf("[2] Lote 10k\n");
     printf("[3] Lote 100k\n");  

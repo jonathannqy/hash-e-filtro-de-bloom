@@ -12,14 +12,14 @@
 // #define TAMANHO_TABELA 1361 // FC = 75%.
 
 // Tamanhos ideais para um lote de 10.000:
-//#define TAMANHO_TABELA 40009 // FC = 0.25 = 25%.
+// #define TAMANHO_TABELA 40009 // FC = 25%.
 // #define TAMANHO_TABELA 20011 // FC = 50%.
-// #define TAMANHO_TABELA  13337 // FC = 75%.
+// #define TAMANHO_TABELA 13337 // FC = 75%.
 
 // Tamanhos ideais para um lote de 100.000:
-//#define TAMANHO_TABELA 400009 // FC = 0.25 = 25%. 
-// #define TAMANHO_TABELA  200003 // FC = 50%.
-// #define TAMANHO_TABELA  133379 // FC = 75%.
+// #define TAMANHO_TABELA 400009 // FC = 25%. 
+// #define TAMANHO_TABELA 200003 // FC = 50%.
+// #define TAMANHO_TABELA 133379 // FC = 75%.
 
 // Funções principais
 void inicializar_hash(tabelaHash* h) {
