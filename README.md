@@ -58,6 +58,9 @@ usuarios1k.txt, usuarios10k.txt e usuarios100k.txt.
 
 * Caso queira voltar uma opção por ter se confundido, é necessário fechar o programa e realizar os processos novamente.
 
+* O tamanho da tabela hash desse sistema só pode ser alterado no arquivo "hash.c" em "TAMANHO_TABELA". Nele, há também os Fatores  
+de Carga ideais referentes a quantidade de "usuários" que serão inseridos. 
+
 ### Exemplos de Execução
 
 Quando entrar no sistema, aparecerá estas opções:
