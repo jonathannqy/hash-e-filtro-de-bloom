@@ -3,13 +3,13 @@
 
 void menu_principal() {
     printf("\n--- Sistema de Verificação de Cadastro ---\n");
-    printf("[1] Inserir novo usuário\n");
+    printf("[1] Inserir novo usuário no hash e no bloom\n");
     printf("[2] Consultar usuário (com bloom)\n"); // <- Nome atualizado para clareza
     printf("[3] Consultar usuário (sem bloom)\n");   // <- NOVA OPÇÃO AQUI
     printf("[4] Exibir estatísticas\n");
-    printf("[5] Inserir lote\n");
+    printf("[5] Inserir lote na tabela hash e no bloom\n");
     printf("[6] Gerar lote (Arquivo)\n");
-    printf("[7] Quantidade de registros\n");
+    printf("[7] Quantidade de registrados na tabela hash\n");
     printf("[8] Teste de busca cronometrado (sem bloom)\n");
     printf("[9] Teste de busca cronometrado (com bloom)\n");
     printf("[0] Sair\n");

@@ -53,7 +53,7 @@ int main() {
 
                 // Regista uma consulta
                 status.total_consultas++;
-                
+
                 int tempo_inicial = iniciar_cronometro();
 
                 if (consultar_bloom(&bloom, identificador) == 0) {
@@ -190,7 +190,7 @@ int main() {
             }
 
             case 7: {
-                printf("Quantidade de registros: %d\n", quantidade_registros(&hash));
+                printf("Quantidade de registrados na Hash: %d\n", quantidade_registros(&hash));
                 break;
             }
 
