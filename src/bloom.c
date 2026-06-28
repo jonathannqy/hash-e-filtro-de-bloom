@@ -3,25 +3,28 @@
 
 
 
-int verificar_bit(char *vetor, int pos){
+int verificar_bit(unsigned char *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
+    
+    //Vetor de potências de 2 para ativação e verificação de bits
+    int potencia[8] = {1, 2, 4, 8, 16, 32, 64, 128};
+    
+    //Divisão, como tem unsigned nunca fica negativo
+    return (vetor[byte_posicao] / potencia[bit_posicao]) % 2;
 
-    //Usando o operador (&) e desclocamento (<<), isso ignora o sinal negativo e foca apenas no bit fisico na memória
-    if(vetor[byte_posicao] & (1 << bit_posicao)){
-        return 1; //Aqui é verdadeiro. O bit está ligado
-
-   }
-   return 0; //Falso, o bit nao está ligado
 }
 
     void marcar_bit(char *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
+    int potencia[8] = {1, 2, 4, 8, 16, 32, 64, 128};
     
-    //Garante que o bit seja ligado sem desligar os bits vizinhos
-    vetor[byte_posicao] |= (1 << bit_posicao);
+    //Só soma a potencia se o bit estiver desligado
+    if(verificar_bit(vetor, pos) == 0){
+        vetor[byte_posicao] += potencia[bit_posicao];
     }
+}
 
 Filtrodebloom criar_filtro(int n){
     Filtrodebloom bloom;
