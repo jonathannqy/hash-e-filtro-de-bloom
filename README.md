@@ -118,5 +118,6 @@ Quando entrar no sistema, aparecerá estas opções:
     * [6] -> [1] (Gera lote de 1k normal)
     * [5] -> [1] (Insere o lote de 1k no sistema)
     * [6] -> [4] (Gera o lote de 1k FAKE)
-    * [8] -> [4] (Testa o tempo buscando os fakes SEM Bloom - anote o tempo)
-    * [9] -> [4] (Testa o tempo buscando os fakes COM Bloom - veja a mágica e os falsos positivos)
+    * [8] -> [4] (Testa o tempo buscando os fakes sem Bloom)
+    * [9] -> [4] (Testa o tempo buscando os fakes com Bloom)
+
