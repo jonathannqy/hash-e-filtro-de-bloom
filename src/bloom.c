@@ -1,6 +1,16 @@
 #include "bloom.h"
 #include "hash.h"
 
+unsigned int hash_djb2(char *chave) {
+    unsigned int hash = 5381; 
+    //Percorre cada caractere da string até encontrar o caractere nulo que marca o fim do texto
+    for (int i = 0; chave[i] != '\0'; i++) {
+        hash = (hash * 33) + chave[i]; 
+        //Garante que a ordem das lestras eo valor delas criem um número único
+    }
+    return hash;
+}
+
 int verificar_bit(unsigned char *vetor, int pos){
     int byte_posicao = pos / 8;
     int bit_posicao = pos % 8;
@@ -56,9 +66,10 @@ int hash_auxiliar(int chave, int tamanho) {
 
 void inserir_bloom(Filtrodebloom *bloom, char *item){
 
+   unsigned int chave_base = hash_djb2(item);
   //Funções para gerar o indice do número
-  int h1 = hash_divisao(item);
-  int h2 = hash_auxiliar(h1, bloom->m);
+  int h1 = chave_base % bloom->m;
+  int h2 = hash_auxiliar(chave_base / 10, bloom->m);
 
   int i;
   
@@ -76,10 +87,10 @@ void inserir_bloom(Filtrodebloom *bloom, char *item){
 }
 
 int consultar_bloom(Filtrodebloom *bloom, char *item){
-
+    unsigned int chave_base = hash_djb2(item);
     //Calcula os dois hash usando métodos diferentes
-    int h1 = hash_divisao(item); 
-    int h2 = hash_auxiliar(h1, bloom->m);
+    int h1 = chave_base % bloom->m;
+    int h2 = hash_auxiliar(chave_base / 10, bloom->m);
     
     int i;
     for (i = 0; i < bloom->k; i++) {
