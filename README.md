@@ -113,11 +113,11 @@ Quando entrar no sistema, aparecerá estas opções:
     * Selecione '4' para exibir as estatísticas.
 
 #### 5) Teste em lote com e sem o filtro de bloom mostrando os falsos positivos
-    Siga essa ordem no menu perceber a diferença que o Filtro de Bloom faz:  
+    Siga essa ordem no menu para perceber a diferença que o Filtro de Bloom faz:  
 
-    * [6] -> [1] (Gera lote de 1k normal)
-    * [5] -> [1] (Insere o lote de 1k no sistema)
-    * [6] -> [4] (Gera o lote de 1k FAKE)
-    * [8] -> [4] (Testa o tempo buscando os fakes sem Bloom)
-    * [9] -> [4] (Testa o tempo buscando os fakes com Bloom)
+    * [6] -> [3] (Gera lote de 100k normal)
+    * [5] -> [3] (Insere o lote de 100k no sistema)
+    * [6] -> [6] (Gera o lote de 100k FAKE)
+    * [8] -> [6] (Testa o tempo buscando os fakes sem Bloom)
+    * [9] -> [6] (Testa o tempo buscando os fakes com Bloom)
 
