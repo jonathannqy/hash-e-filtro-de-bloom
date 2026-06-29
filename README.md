@@ -109,5 +109,14 @@ Quando entrar no sistema, aparecerá estas opções:
     * Selecione a opção '2' e digite o usuário que deseja buscar, pode ser o que acabou de ser inserido   
     ou algum dos que foram gerados no lote. Para isso, será necessário entrar na pasta "data" e abrir o lote pelo  
     Explorador de Arquivos ou pelo próprio VS Code.
-    * Tente consulta um usuário que não existe.  
+    * Tente consultar um usuário que não existe.  
     * Selecione '4' para exibir as estatísticas.
+
+#### 5) Teste em lote com e sem o filtro de bloom mostrando os falsos positivos
+    Siga essa ordem no menu perceber a diferença que o Filtro de Bloom faz:  
+
+    * [6] -> [1] (Gera lote de 1k normal)
+    * [5] -> [1] (Insere o lote de 1k no sistema)
+    * [6] -> [4] (Gera o lote de 1k FAKE)
+    * [8] -> [4] (Testa o tempo buscando os fakes SEM Bloom - anote o tempo)
+    * [9] -> [4] (Testa o tempo buscando os fakes COM Bloom - veja a mágica e os falsos positivos)
