@@ -36,7 +36,7 @@ int main() {
         switch (opcao) {
             case 1: {
                 printf("Digite o identificador do usuário: ");
-                scanf("%49s", identificador);
+                scanf("%20s", identificador);
 
                 inserir_hash(&hash, identificador);
                 inserir_bloom(&bloom, identificador);
@@ -46,10 +46,9 @@ int main() {
                 break;
             }
 
-
             case 2: {
                 printf("Digite o identificador para consulta: ");
-                scanf("%19s", identificador);
+                scanf("%20s", identificador);
 
                 // Regista uma consulta
                 status.total_consultas++;
@@ -88,7 +87,7 @@ int main() {
             
             case 3: {
                 printf("Digite o identificador para consulta direta na Hash: ");
-                scanf("%19s", identificador);
+                scanf("%20s", identificador);
 
                 int tempo_inicial = iniciar_cronometro();
 
@@ -159,13 +158,7 @@ int main() {
             case 6: {
                 int tamanho_lote;
 
-                printf("Qual o tamanho do lote: \n");
-                printf("[1] Lote 1k\n");
-                printf("[2] Lote 10k\n");
-                printf("[3] Lote 100k\n");
-                printf("[4] Lote 1k fake\n");
-                printf("[5] Lote 10k fake\n");
-                printf("[6] Lote 100k fake\n");
+                menu_lote();
                 scanf("%d", &tamanho_lote);
 
                     if (tamanho_lote == 1) {
