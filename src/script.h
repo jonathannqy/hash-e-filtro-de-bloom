@@ -6,7 +6,11 @@
 #include <time.h>
 
 void gerar_nome_aleatorio(char *buffer);
+void gerar_nome_fake(char *buffer);
+
 void gerar_arquivo(char *nome_arquivo, int quantidade);
+void gerar_arquivo_fake(char *nome_arquivo, int quantidade);
+
 int arquivo_existe(const char *nome_arquivo);
 
 #endif

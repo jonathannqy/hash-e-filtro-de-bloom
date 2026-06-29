@@ -21,6 +21,9 @@ void menu_lote() {
     printf("[1] Lote 1k\n");
     printf("[2] Lote 10k\n");
     printf("[3] Lote 100k\n");  
+    printf("[4] Lote 1k fake\n");
+    printf("[5] Lote 10k fake\n");
+    printf("[6] Lote 100k fake\n");
 }
 
 void resultados_sem_bloom(char* nome_arquivo, int total_consultas, int tempo_total){

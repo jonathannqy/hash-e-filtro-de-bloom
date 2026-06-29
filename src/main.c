@@ -163,6 +163,9 @@ int main() {
                 printf("[1] Lote 1k\n");
                 printf("[2] Lote 10k\n");
                 printf("[3] Lote 100k\n");
+                printf("[4] Lote 1k fake\n");
+                printf("[5] Lote 10k fake\n");
+                printf("[6] Lote 100k fake\n");
                 scanf("%d", &tamanho_lote);
 
                     if (tamanho_lote == 1) {
@@ -180,6 +183,21 @@ int main() {
                         gerar_arquivo("data/usuarios100k.txt", tamanho_lote);
                     } 
                     
+                    else if (tamanho_lote == 4) {
+                        tamanho_lote = 1000;
+                        gerar_arquivo_fake("data/usuarios1kfake.txt", tamanho_lote);
+                    }
+
+                    else if (tamanho_lote == 5) {
+                        tamanho_lote = 10000;
+                        gerar_arquivo_fake("data/usuarios10kfake.txt", tamanho_lote);
+                    }
+                    
+                    else if (tamanho_lote == 6) {
+                        tamanho_lote = 100000;
+                        gerar_arquivo_fake("data/usuarios100kfake.txt", tamanho_lote);
+                    }
+
                     else {
                         printf("Opção inválida!\n");
                         break;
@@ -212,7 +230,19 @@ int main() {
                 else if (lote == 3) {
                     strcpy(nome_arquivo, "data/usuarios100k.txt");
                 } 
-                
+
+                else if (lote == 4) {
+                    strcpy(nome_arquivo, "data/usuarios1kfake.txt");
+                } 
+
+                else if (lote == 5) {
+                    strcpy(nome_arquivo, "data/usuarios10kfake.txt");
+                } 
+
+                else if (lote == 6) {
+                    strcpy(nome_arquivo, "data/usuarios100kfake.txt");
+                }
+
                 else {
                     printf("Opção inválida!\n");
                     break;
@@ -268,6 +298,18 @@ int main() {
                 else if (lote == 3) {
                     strcpy(nome_arquivo, "data/usuarios100k.txt");
                 } 
+
+                else if (lote == 4) {
+                    strcpy(nome_arquivo, "data/usuarios1kfake.txt");
+                } 
+
+                else if (lote == 5) {
+                    strcpy(nome_arquivo, "data/usuarios10kfake.txt");
+                } 
+
+                else if (lote == 6) {
+                    strcpy(nome_arquivo, "data/usuarios100kfake.txt");
+                }
                 
                 else {
                     printf("Opção inválida!\n");
