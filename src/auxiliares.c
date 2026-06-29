@@ -26,33 +26,6 @@ void menu_lote() {
     printf("[6] Lote 100k fake\n");
 }
 
-void resultados_sem_bloom(char* nome_arquivo, int total_consultas, int tempo_total){
-    printf("\n--- RESULTADOS DO EXPERIMENTO ---\n");
-    printf("Arquivo testado: %s\n", nome_arquivo);
-    printf("Quantidade de buscas: %d\n", total_consultas);
-    printf("Tempo total gasto: %d microssegundos.\n", tempo_total);
-    printf("Tamanho da tabela Hash: %d\n", tamanho_tabela()); 
-    
-    if (total_consultas > 0) {
-        printf("Tempo médio por busca: %.4f microssegundos.\n", (double)tempo_total / total_consultas);
-    }
-}
-
-
-void resultados_com_bloom(char* nome_arquivo, int total_consultas, int consultas_evitadas, int falsos_positivos, int tempo_total){
-    printf("\n--- RESULTADOS DO EXPERIMENTO ---\n");
-    printf("Arquivo testado: %s\n", nome_arquivo);
-    printf("Quantidade de buscas: %d\n", total_consultas);
-    printf("Consultas pesadas (Hash) evitadas: %d\n", consultas_evitadas);
-    printf("Falsos positivos do Bloom: %d\n", falsos_positivos);
-    printf("Tempo total gasto: %d microssegundos.\n", tempo_total);
-    printf("Tamanho da tabela Hash: %d\n", tamanho_tabela()); 
-
-    if (total_consultas > 0) {
-        printf("Tempo médio por busca: %.4f microssegundos.\n", (double)tempo_total / total_consultas);
-        printf("Taxa de Falsos Positivos neste lote: %.2f%%\n", ((double)falsos_positivos / total_consultas) * 100.0);
-    }
-}
 int iniciar_cronometro(){
     //A função clock vai pegar o tempo de cpu e guardar em um int normal
     return clock();
@@ -84,4 +57,31 @@ void inserir_lote_completo(tabelaHash* h, Filtrodebloom* b, char* nome_arquivo) 
 
     fclose(arquivo);
     printf("Lote carregado com sucesso no Hash e no Bloom!\n");
+}
+
+void resultados_sem_bloom(char* nome_arquivo, int total_consultas, int tempo_total){
+    printf("\n--- RESULTADOS DO EXPERIMENTO ---\n");
+    printf("Arquivo testado: %s\n", nome_arquivo);
+    printf("Quantidade de buscas: %d\n", total_consultas);
+    printf("Tempo total gasto: %d microssegundos.\n", tempo_total);
+    printf("Tamanho da tabela Hash: %d\n", tamanho_tabela()); 
+    
+    if (total_consultas > 0) {
+        printf("Tempo médio por busca: %.4f microssegundos.\n", (double)tempo_total / total_consultas);
+    }
+}
+
+void resultados_com_bloom(char* nome_arquivo, int total_consultas, int consultas_evitadas, int falsos_positivos, int tempo_total){
+    printf("\n--- RESULTADOS DO EXPERIMENTO ---\n");
+    printf("Arquivo testado: %s\n", nome_arquivo);
+    printf("Quantidade de buscas: %d\n", total_consultas);
+    printf("Consultas pesadas (Hash) evitadas: %d\n", consultas_evitadas);
+    printf("Falsos positivos do Bloom: %d\n", falsos_positivos);
+    printf("Tempo total gasto: %d microssegundos.\n", tempo_total);
+    printf("Tamanho da tabela Hash: %d\n", tamanho_tabela()); 
+
+    if (total_consultas > 0) {
+        printf("Tempo médio por busca: %.4f microssegundos.\n", (double)tempo_total / total_consultas);
+        printf("Taxa de Falsos Positivos neste lote: %.2f%%\n", ((double)falsos_positivos / total_consultas) * 100.0);
+    }
 }

@@ -11,6 +11,7 @@ typedef struct {
 
 //funções filtro de bloom de (criar, liberar(free), inserir e de consultar o filtro)
 Filtrodebloom criar_filtro(int n);
+unsigned int hash_djb2(char *chave);
 void liberar_filtro(Filtrodebloom *bloom);
 void inserir_bloom(Filtrodebloom *bloom, char *item);
 int consultar_bloom(Filtrodebloom *bloom, char *item);
