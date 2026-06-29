@@ -42,7 +42,7 @@ Filtrodebloom criar_filtro(int n){
     bloom.k = 7;
    
     //Calloc vai zerar todos os bits automaticamente ao alocar a memória
-    bloom.vetor = calloc((bloom.m / 8) + 1, sizeof(char));
+    bloom.vetor = calloc((bloom.m / 8) + 1, sizeof(unsigned char));
 
     return bloom;
 }
