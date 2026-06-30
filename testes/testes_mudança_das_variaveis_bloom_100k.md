@@ -1,6 +1,7 @@
 # Resultados dos Testes de Performance: Impacto dos Parâmetros do Filtro de Bloom (100k Usuários)
 
-Este arquivo .md contém os resultados dos testes realizados com um volume de **100k usuários**, avaliando o impacto da variação do tamanho do vetor de bits ($m$) e da quantidade de funções hash ($k$) na eficiência do **Filtro de Bloom**. Todos os cenários foram avaliados sob um **Fator de Carga (FC) de 50%** na estrutura principal.
+Este arquivo .md contém os resultados dos testes realizados com um volume de **100k usuários**, avaliando o impacto da variação do tamanho do vetor de bits ($m$) e da quantidade de funções hash ($k$) na eficiência do **Filtro de Bloom**. Todos os cenários foram avaliados sob um **Fator de Carga (FC) de 50%** na estrutura principal.  
+[Obs: todos os testes foram feito com o criar_filtro(100000)]
 
 ## Tabela Comparativa Resumida
 

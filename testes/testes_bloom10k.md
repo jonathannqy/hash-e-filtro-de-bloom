@@ -1,6 +1,7 @@
 # Resultados dos Testes de Performance: Filtro de Bloom vs Sem Filtro (10k Buscas)
 
-Este arquivo .md contém os resultados dos testes realizados com **10k buscas falsas (fake)**, avaliando o impacto do **Filtro de Bloom** no tempo de execução em microssegundos sob diferentes Fatores de Carga (FC = 25%, 50% e 75%).
+Este arquivo .md contém os resultados dos testes realizados com **10k buscas falsas (fake)**, avaliando o impacto do **Filtro de Bloom** no tempo de execução em microssegundos sob diferentes Fatores de Carga (FC = 25%, 50% e 75%).  
+[Obs: todos os testes foram feito com o criar_filtro(100000), mesmo usando 10k de usuários]
 
 ## Tabela Comparativa Resumida (Médias)
 

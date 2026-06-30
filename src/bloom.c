@@ -34,6 +34,7 @@ void marcar_bit(unsigned char *vetor, int pos){
     }
 }
 
+// int "n" representa a quantidade de elementos a serem inseridos
 Filtrodebloom criar_filtro(int n){
     Filtrodebloom bloom;
     //10 bits para cada elemento inserido

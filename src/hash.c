@@ -3,8 +3,9 @@
 #include <string.h>
 #include "hash.h"
  
-// 100003 é um número primo adequado para evitar colisões com até 100000 entradas.
-#define TAMANHO_TABELA 20011
+// Como podemos notar mais diferença quando inserimos 100k de usuários, definimos por padrão o FC em 50% pois é um dos valores ideais para um lote de 100.000.
+#define TAMANHO_TABELA 200003
+
 
 // Tamanhos ideais para um lote de 1000:
 // #define TAMANHO_TABELA 4001 // FC = 25%.

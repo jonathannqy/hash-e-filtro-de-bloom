@@ -17,6 +17,7 @@ int main() {
 
     // Inicializando o filtro de Bloom
     Filtrodebloom bloom = criar_filtro(100000);
+    // O parâmetro 100000 representa a quantidade de usuários que iremos inserir, como os testes são mais perceptíveis com 100k, deixamos por padrão 100000 na função.
     //////////////////////////////
 
     // Inicializando as estatísticas
