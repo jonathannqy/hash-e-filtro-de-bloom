@@ -1,4 +1,4 @@
-# Hash e Filtro de Bloom
+# Hash e Filtro de Bloom - Don't worry. Be happy, my friend
 
 Este repositório serve como guia para executar o "Sistema de Consulta Eficiente com Tabela Hash e
 Filtro de Bloom"
